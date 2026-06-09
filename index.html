@@ -279,9 +279,8 @@
       novalidate>
 
       <!-- Salesforce required hidden fields -->
-      <input type="hidden" name="oid"        value="00DgK00000Pd6iH"/>
-      <input type="hidden" name="retURL"     value="?success=1"/>
-      <input type="hidden" name="lead_source" value="Web"/>
+      <input type="hidden" name="oid"    value="00DgK00000Pd6iH"/>
+      <input type="hidden" name="retURL" value="?success=1"/>
 
       <!-- Personal details -->
       <div class="section-label">Your details</div>
@@ -357,17 +356,20 @@
       <!-- Interest -->
       <div class="section-label">Your interest</div>
       <div class="row">
-        <div class="field" id="f-src">
-          <label for="lead_source">How did you hear about us? <span class="req">*</span></label>
-          <select id="lead_source" name="lead_source" required onchange="updateScore()">
-            <option value="" disabled selected>Select source</option>
-            <option value="Web">Website / Search</option>
-            <option value="Word of mouth">Referral / Word of mouth</option>
-            <option value="Social">LinkedIn / Social media</option>
-            <option value="Cold Call">Cold call / Email</option>
-            <option value="Other">Trade show / Event</option>
+        <div class="field">
+          <!--
+            'lead_source' maps to the standard Salesforce Lead.LeadSource field.
+            Not required — no asterisk, no validation check.
+          -->
+          <label for="lead_source">Lead Source</label>
+          <select id="lead_source" name="lead_source" onchange="updateScore()">
+            <option value="" selected>Select source</option>
+            <option value="Web">Web</option>
+            <option value="Phone Inquiry">Phone Inquiry</option>
+            <option value="Partner Referral">Partner Referral</option>
+            <option value="Purchased List">Purchased List</option>
+            <option value="Other">Other</option>
           </select>
-          <span class="err-msg">Please select a source</span>
         </div>
         <div class="field">
           <label for="pi">Product Interest</label>
@@ -461,10 +463,10 @@ function calcScore() {
   if (v('email'))       s += 20;
   if (v('phone_num'))   s += 15;
   var src = v('lead_source');
-  if (src === 'Word of mouth') s += 30;
-  else if (src === 'Web')      s += 20;
-  else if (src === 'Social')   s += 15;
-  else if (src === 'Cold Call') s += 10;
+  if (src === 'Partner Referral') s += 30;
+  else if (src === 'Web')         s += 20;
+  else if (src === 'Phone Inquiry') s += 15;
+  else if (src === 'Purchased List') s += 10;
   return s;
 }
 function v(id) {
@@ -508,10 +510,10 @@ function validate() {
       el.classList.remove('err');
     }
   }
-  chk('last_name',   'f-last',    function(v){ return v.length > 0; });
-  chk('company',     'f-company', function(v){ return v.length > 0; });
-  chk('email',       'f-email',   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
-  chk('lead_source', 'f-src',     function(v){ return v.length > 0; });
+  chk('last_name', 'f-last',    function(v){ return v.length > 0; });
+  chk('company',   'f-company', function(v){ return v.length > 0; });
+  chk('email',     'f-email',   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
+  // lead_source is NOT validated — optional field
   return ok;
 }
 
