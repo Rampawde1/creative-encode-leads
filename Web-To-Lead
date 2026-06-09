@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us — Creative Encode</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand:    #185FA5;
+      --brand-dk: #0C447C;
+      --brand-lt: #E6F1FB;
+      --green:    #2E844A;
+      --green-lt: #EAF3DE;
+      --red:      #C23934;
+      --red-lt:   #FCEAEA;
+      --amber:    #854F0B;
+      --amber-lt: #FAEEDA;
+      --gray:     #F5F5F5;
+      --border:   #DDDDDD;
+      --text:     #1A1A1A;
+      --muted:    #666666;
+      --radius:   10px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Arial, sans-serif;
+      background: #F0F4FA;
+      min-height: 100vh;
+      padding: 48px 16px 64px;
+      color: var(--text);
+    }
+    .container { max-width: 620px; margin: 0 auto; }
+
+    /* ── Header ─────────────────────── */
+    .header {
+      background: var(--brand);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 36px 44px 30px;
+      color: #fff;
+    }
+    .header-logo {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      opacity: .75; margin-bottom: 14px;
+    }
+    .header h1 {
+      font-size: 26px; font-weight: 600;
+      line-height: 1.3; margin-bottom: 10px;
+    }
+    .header p { font-size: 14px; opacity: .82; line-height: 1.65; }
+    .trust-badges {
+      display: flex; gap: 18px; margin-top: 18px; flex-wrap: wrap;
+    }
+    .badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; opacity: .8;
+    }
+    .badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ── Card ───────────────────────── */
+    .card {
+      background: #fff;
+      padding: 36px 44px 32px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.09);
+    }
+
+    /* ── Section label ──────────────── */
+    .section-label {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .08em;
+      padding-bottom: 8px; margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label:not(:first-child) { margin-top: 26px; }
+
+    /* ── Grid ───────────────────────── */
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .row.full { grid-template-columns: 1fr; }
+    @media(max-width:520px){ .row { grid-template-columns: 1fr; } }
+
+    /* ── Fields ─────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 5px; margin-top: 14px; }
+    .field:first-child { margin-top: 0; }
+    label {
+      font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 3px;
+    }
+    .req { color: var(--red); font-size: 14px; }
+    input[type=text], input[type=email],
+    input[type=tel], select, textarea {
+      font-family: inherit; font-size: 14px;
+      padding: 10px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      color: var(--text); background: #fff;
+      outline: none; appearance: none; -webkit-appearance: none;
+      transition: border-color .15s, box-shadow .15s;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(24,95,165,.12);
+    }
+    input.err, select.err, textarea.err {
+      border-color: var(--red);
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 34px; cursor: pointer;
+    }
+    textarea { resize: vertical; min-height: 88px; }
+    .err-msg {
+      font-size: 12px; color: var(--red); display: none;
+    }
+    .field.has-err .err-msg { display: block; }
+
+    /* ── Phone row ──────────────────── */
+    .phone-wrap { display: flex; gap: 8px; }
+    .phone-wrap select { width: 130px; flex-shrink: 0; }
+    .phone-wrap input  { flex: 1; }
+
+    /* ── Score bar ──────────────────── */
+    .score-wrap {
+      margin-top: 20px;
+      background: var(--brand-lt);
+      border: 1px solid #C8DCF5;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+    }
+    .score-left { font-size: 13px; color: var(--muted); }
+    .score-right { display: flex; align-items: center; gap: 8px; }
+    .score-num {
+      font-size: 18px; font-weight: 700;
+      color: var(--brand);
+    }
+    .rating {
+      font-size: 11px; font-weight: 700;
+      padding: 3px 9px; border-radius: 10px;
+    }
+    .r-hot  { background: var(--red-lt);   color: var(--red);   }
+    .r-warm { background: var(--amber-lt); color: var(--amber); }
+    .r-cold { background: var(--gray);     color: var(--muted); }
+    .score-bar-track {
+      flex: 1; height: 6px;
+      background: #D8E8F7; border-radius: 3px; overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: var(--brand);
+      transition: width .35s, background .35s;
+    }
+
+    /* ── Privacy ────────────────────── */
+    .privacy {
+      margin-top: 20px;
+      background: var(--gray); border-radius: 7px;
+      padding: 11px 14px;
+      font-size: 12px; color: var(--muted);
+      line-height: 1.6;
+      display: flex; gap: 9px; align-items: flex-start;
+    }
+    .privacy svg { flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Button ─────────────────────── */
+    .btn {
+      margin-top: 22px; width: 100%;
+      padding: 14px; border: none; border-radius: 8px;
+      background: var(--brand); color: #fff;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center;
+      justify-content: center; gap: 8px;
+      transition: filter .15s, transform .1s;
+    }
+    .btn:hover   { filter: brightness(1.1); }
+    .btn:active  { transform: scale(.99); }
+    .btn:disabled{ background: #B0BEC5; cursor: not-allowed; }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.35);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .7s linear infinite; display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Success screen ─────────────── */
+    .success {
+      display: none; background: #fff;
+      padding: 52px 44px; text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,.09);
+    }
+    .success-icon {
+      width: 68px; height: 68px;
+      background: var(--green-lt); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 22px;
+    }
+    .success h2 { font-size: 24px; font-weight: 600; margin-bottom: 12px; }
+    .success p  { font-size: 14px; color: var(--muted); line-height: 1.7;
+                  max-width: 360px; margin: 0 auto 24px; }
+    .success-meta {
+      display: inline-block;
+      background: var(--green-lt); color: var(--green);
+      font-size: 13px; font-weight: 600;
+      padding: 10px 20px; border-radius: 8px; margin-bottom: 24px;
+    }
+    .btn-outline {
+      font-family: inherit; font-size: 14px;
+      padding: 10px 24px; border: 1.5px solid var(--border);
+      border-radius: 8px; background: #fff;
+      color: var(--text); cursor: pointer;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
+
+    /* ── Footer ─────────────────────── */
+    .footer {
+      background: var(--gray);
+      border-top: 1px solid var(--border);
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 14px 44px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      font-size: 12px; color: var(--muted);
+      flex-wrap: wrap; gap: 8px;
+    }
+    .sf-badge { display: flex; align-items: center; gap: 5px; font-size: 11px; }
+    .sf-dot   { width: 8px; height: 8px; border-radius: 50%; background: #00A1E0; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-logo">Creative Encode</div>
+    <h1>Let&#8217;s talk about your project</h1>
+    <p>Fill in your details and our team will get back to you within 24&#160;hours.
+       Every enquiry is handled personally.</p>
+    <div class="trust-badges">
+      <div class="badge">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="6.5"/><path d="M5 8l2 2 4-4"/>
+        </svg>
+        Reply within 24 hours
+      </div>
+      <div class="badge">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16">
+          <rect x="2" y="7" width="12" height="8" rx="1.5"/><path d="M5 7V5a3 3 0 016 0v2"/>
+        </svg>
+        Your data is secure
+      </div>
+      <div class="badge">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16">
+          <path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5Z"/>
+        </svg>
+        No spam, ever
+      </div>
+    </div>
+  </div>
+
+  <!-- Form card -->
+  <div class="card" id="formCard">
+    <!--
+    ═══════════════════════════════════════════════════════
+     ACTION = Salesforce Web-to-Lead endpoint
+     Replace the oid value with YOUR actual Salesforce Org ID
+    ═══════════════════════════════════════════════════════
+    -->
+    <form
+      id="leadForm"
+      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+      method="POST"
+      novalidate>
+
+      <!-- Salesforce required hidden fields -->
+      <input type="hidden" name="oid"        value="00DgK00000Pd6iH"/>
+      <input type="hidden" name="retURL"     value="?success=1"/>
+      <input type="hidden" name="lead_source" value="Web"/>
+
+      <!-- Personal details -->
+      <div class="section-label">Your details</div>
+      <div class="row">
+        <div class="field">
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name"
+                 placeholder="Rohan" autocomplete="given-name"
+                 oninput="updateScore()"/>
+        </div>
+        <div class="field" id="f-last">
+          <label for="last_name">Last Name <span class="req">*</span></label>
+          <input type="text" id="last_name" name="last_name"
+                 placeholder="Mehta" required autocomplete="family-name"
+                 oninput="updateScore()"/>
+          <span class="err-msg">Last name is required</span>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="field" id="f-company">
+          <label for="company">Company <span class="req">*</span></label>
+          <input type="text" id="company" name="company"
+                 placeholder="Nexgen Solutions Pvt Ltd" required
+                 autocomplete="organization"
+                 oninput="updateScore()"/>
+          <span class="err-msg">Company name is required</span>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="section-label">Contact information</div>
+      <div class="row full">
+        <div class="field" id="f-email">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email"
+                 placeholder="rohan@nexgensolutions.com" required
+                 autocomplete="email"
+                 oninput="updateScore()"/>
+          <span class="err-msg">Please enter a valid email address</span>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="field">
+          <label for="phone_num">Phone Number</label>
+          <div class="phone-wrap">
+            <select id="ccode" aria-label="Country code" onchange="updateScore()">
+              <option value="+91"  selected>🇮🇳 +91</option>
+              <option value="+1"  >🇺🇸 +1</option>
+              <option value="+44" >🇬🇧 +44</option>
+              <option value="+61" >🇦🇺 +61</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+65" >🇸🇬 +65</option>
+              <option value="+49" >🇩🇪 +49</option>
+              <option value="+33" >🇫🇷 +33</option>
+              <option value="+81" >🇯🇵 +81</option>
+              <option value="+86" >🇨🇳 +86</option>
+              <option value="+55" >🇧🇷 +55</option>
+              <option value="+27" >🇿🇦 +27</option>
+              <option value="+966">🇸🇦 +966</option>
+              <option value="+64" >🇳🇿 +64</option>
+            </select>
+            <!-- 'phone' maps directly to Salesforce Lead.Phone field -->
+            <input type="tel" id="phone_num" name="phone"
+                   placeholder="98765 43210"
+                   autocomplete="tel"
+                   oninput="updateScore()"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interest -->
+      <div class="section-label">Your interest</div>
+      <div class="row">
+        <div class="field" id="f-src">
+          <label for="lead_source">How did you hear about us? <span class="req">*</span></label>
+          <select id="lead_source" name="lead_source" required onchange="updateScore()">
+            <option value="" disabled selected>Select source</option>
+            <option value="Web">Website / Search</option>
+            <option value="Word of mouth">Referral / Word of mouth</option>
+            <option value="Social">LinkedIn / Social media</option>
+            <option value="Cold Call">Cold call / Email</option>
+            <option value="Other">Trade show / Event</option>
+          </select>
+          <span class="err-msg">Please select a source</span>
+        </div>
+        <div class="field">
+          <label for="pi">Product Interest</label>
+          <!--
+            Replace 00NgK0000426IZC
+            with the actual custom field ID from your Salesforce
+            Web-to-Lead form HTML (starts with 00N...)
+          -->
+          <select id="pi" name="00NgK0000426IZC">
+            <option value="" selected>Select product</option>
+            <option value="CRM">CRM</option>
+            <option value="Analytics">Analytics</option>
+            <option value="Integration">Integration</option>
+            <option value="Other">Other / Not sure</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="field">
+          <label for="description">Message</label>
+          <textarea id="description" name="description"
+            placeholder="Tell us briefly what you're looking for or any specific requirements..."></textarea>
+        </div>
+      </div>
+
+      <!-- Live score preview -->
+      <div class="score-wrap">
+        <div class="score-left">Your lead score</div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" id="scoreBar" style="width:0%"></div>
+        </div>
+        <div class="score-right">
+          <span class="score-num" id="scoreNum">0</span>
+          <span class="rating r-cold" id="scoreRating">Cold</span>
+        </div>
+      </div>
+
+      <!-- Privacy -->
+      <div class="privacy">
+        <svg width="15" height="15" fill="none" stroke="#888" stroke-width="1.5" viewBox="0 0 16 16">
+          <rect x="2" y="7" width="12" height="8" rx="1.5"/><path d="M5 7V5a3 3 0 016 0v2"/>
+        </svg>
+        By submitting this form you agree to our privacy policy. We use your
+        information only to respond to your enquiry and will never sell or share
+        your data with third parties.
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn" id="submitBtn">
+        <div class="spinner" id="spinner"></div>
+        <span id="btnText">Send enquiry &#8594;</span>
+      </button>
+
+    </form>
+  </div><!-- /card -->
+
+  <!-- Success screen -->
+  <div class="success" id="successCard">
+    <div class="success-icon">
+      <svg width="34" height="34" fill="none" stroke="#2E844A"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/><path d="M7 12l3.5 3.5L17 8"/>
+      </svg>
+    </div>
+    <h2>Enquiry received!</h2>
+    <p>Thank you for reaching out. A member of the Creative Encode team
+       will contact you personally within <strong>24 hours</strong>.
+       A confirmation has been sent to your inbox.</p>
+    <div class="success-meta" id="successMeta">Score: — &nbsp;|&nbsp; Rating: —</div>
+    <br/>
+    <button class="btn-outline" onclick="resetForm()">Submit another enquiry</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>&copy; 2026 Creative Encode. All rights reserved.</span>
+    <div class="sf-badge">
+      <div class="sf-dot"></div>
+      Powered by Salesforce CRM
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ── Score calculation ─────────────────────────────────────
+function calcScore() {
+  var s = 0;
+  if (v('company'))     s += 20;
+  if (v('email'))       s += 20;
+  if (v('phone_num'))   s += 15;
+  var src = v('lead_source');
+  if (src === 'Word of mouth') s += 30;
+  else if (src === 'Web')      s += 20;
+  else if (src === 'Social')   s += 15;
+  else if (src === 'Cold Call') s += 10;
+  return s;
+}
+function v(id) {
+  return (document.getElementById(id).value || '').trim();
+}
+function updateScore() {
+  var s   = calcScore();
+  var pct = Math.min(s, 100);
+  var bar = document.getElementById('scoreBar');
+  var num = document.getElementById('scoreNum');
+  var rat = document.getElementById('scoreRating');
+  bar.style.width = pct + '%';
+  num.textContent = s;
+  if (s >= 70) {
+    bar.style.background = '#C23934';
+    rat.className = 'rating r-hot';
+    rat.textContent = 'Hot';
+  } else if (s >= 40) {
+    bar.style.background = '#854F0B';
+    rat.className = 'rating r-warm';
+    rat.textContent = 'Warm';
+  } else {
+    bar.style.background = '#185FA5';
+    rat.className = 'rating r-cold';
+    rat.textContent = 'Cold';
+  }
+}
+
+// ── Validation ────────────────────────────────────────────
+function validate() {
+  var ok = true;
+  function chk(inputId, fieldId, test) {
+    var el = document.getElementById(inputId);
+    var fd = document.getElementById(fieldId);
+    if (!test(el.value.trim())) {
+      fd.classList.add('has-err');
+      el.classList.add('err');
+      ok = false;
+    } else {
+      fd.classList.remove('has-err');
+      el.classList.remove('err');
+    }
+  }
+  chk('last_name',   'f-last',    function(v){ return v.length > 0; });
+  chk('company',     'f-company', function(v){ return v.length > 0; });
+  chk('email',       'f-email',   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
+  chk('lead_source', 'f-src',     function(v){ return v.length > 0; });
+  return ok;
+}
+
+// ── Combine country code + phone before submit ────────────
+function combinePhone() {
+  var code = document.getElementById('ccode').value;
+  var num  = (document.getElementById('phone_num').value || '').trim();
+  if (num) {
+    document.getElementById('phone_num').value = code + ' ' + num;
+  }
+}
+
+// ── Form submit ───────────────────────────────────────────
+document.getElementById('leadForm').addEventListener('submit', function(e) {
+  if (!validate()) {
+    e.preventDefault();
+    var first = document.querySelector('.field.has-err input, .field.has-err select');
+    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  combinePhone();
+  // Save score for success screen
+  sessionStorage.setItem('ceScore',  calcScore());
+  sessionStorage.setItem('ceRating', document.getElementById('scoreRating').textContent);
+  // Show loading
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('btnText').textContent   = 'Sending...';
+  // Form POSTs to Salesforce — retURL = ?success=1 — page reloads
+});
+
+// ── Check for success redirect ────────────────────────────
+window.addEventListener('DOMContentLoaded', function() {
+  updateScore();
+  if (window.location.search.indexOf('success=1') > -1) {
+    document.getElementById('formCard').style.display    = 'none';
+    document.getElementById('successCard').style.display = 'block';
+    var score  = sessionStorage.getItem('ceScore')  || '—';
+    var rating = sessionStorage.getItem('ceRating') || '—';
+    document.getElementById('successMeta').textContent =
+      'Score: ' + score + '  |  Rating: ' + rating;
+    sessionStorage.removeItem('ceScore');
+    sessionStorage.removeItem('ceRating');
+  }
+});
+
+// ── Reset form ────────────────────────────────────────────
+function resetForm() {
+  document.getElementById('leadForm').reset();
+  document.getElementById('formCard').style.display   = 'block';
+  document.getElementById('successCard').style.display = 'none';
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('spinner').style.display = 'none';
+  document.getElementById('btnText').textContent = 'Send enquiry →';
+  updateScore();
+  history.replaceState(null, '', window.location.pathname);
+}
+</script>
+</body>
+</html>
