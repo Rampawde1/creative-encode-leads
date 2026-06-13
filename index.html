@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us — Creative Encode Technologies</title>
+  <title>Contact Us — Creative Encode</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -33,65 +33,31 @@
     .container { max-width: 620px; margin: 0 auto; }
 
     /* ── Header ─────────────────────── */
-		<!-- Header -->
-	<div class="header">
+    .header {
+      background: var(--brand);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 36px 44px 30px;
+      color: #fff;
+    }
+    .header-logo {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      opacity: .75; margin-bottom: 14px;
+    }
+    .header h1 {
+      font-size: 26px; font-weight: 600;
+      line-height: 1.3; margin-bottom: 10px;
+    }
+    .header p { font-size: 14px; opacity: .82; line-height: 1.65; }
+    .trust-badges {
+      display: flex; gap: 18px; margin-top: 18px; flex-wrap: wrap;
+    }
+    .badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; opacity: .8;
+    }
+    .badge svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-	  <!-- Logo with icon + text matching your brand -->
-	  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
-
-		<!-- Diamond icon matching your logo -->
-		<svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-		  <path d="M21 3L38 21L21 39L4 21Z" fill="#C23934" opacity="0.15"/>
-		  <path d="M21 3L38 21L21 39L4 21Z"
-				stroke="#C23934" stroke-width="2" fill="none"/>
-		  <path d="M21 10L32 21L21 32L10 21Z"
-				fill="#2D2D2D" opacity="0.85"/>
-		  <path d="M15 21L21 15L27 21L21 27Z"
-				fill="#C23934"/>
-		</svg>
-
-		<!-- Brand name -->
-		<div>
-		  <div style="font-size:18px;font-weight:800;
-					  letter-spacing:.02em;line-height:1.1;
-					  color:#fff">
-			<span style="color:#C23934">CREATIVE</span>ENCODE
-		  </div>
-		  <div style="font-size:11px;font-weight:500;
-					  letter-spacing:.12em;color:rgba(255,255,255,.7);
-					  text-transform:uppercase;margin-top:2px">
-			Technologies
-		  </div>
-		</div>
-
-	  </div>
-
-	  <h1>Let&#8217;s talk about your project</h1>
-	  <p>Fill in your details and our team will get back to you within 24&#160;hours.
-		 Every enquiry is handled personally.</p>
-
-	  <div class="trust-badges">
-		<div class="badge">
-		  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16">
-			<circle cx="8" cy="8" r="6.5"/><path d="M5 8l2 2 4-4"/>
-		  </svg>
-		  Reply within 24 hours
-		</div>
-		<div class="badge">
-		  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16">
-			<rect x="2" y="7" width="12" height="8" rx="1.5"/><path d="M5 7V5a3 3 0 016 0v2"/>
-		  </svg>
-		  Your data is secure
-		</div>
-		<div class="badge">
-		  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16">
-			<path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5Z"/>
-		  </svg>
-		  No spam, ever
-		</div>
-	  </div>
-
-	</div>
     /* ── Card ───────────────────────── */
     .card {
       background: #fff;
@@ -478,7 +444,7 @@
 
   <!-- Footer -->
   <div class="footer">
-    <span>&copy; 2026 Creative Encode Technologies. All rights reserved.</span>
+    <span>&copy; 2026 Creative Encode. All rights reserved.</span>
     <div class="sf-badge">
       <div class="sf-dot"></div>
       Powered by Salesforce CRM
